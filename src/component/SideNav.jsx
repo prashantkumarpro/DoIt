@@ -1,41 +1,44 @@
-import React from 'react'
-import { NavLink } from 'react-router'
+import { Link } from 'react-router'
 import profilePic from '../assets/profile.jpg'
 import { BiTask } from 'react-icons/bi'
+import { MdOutlineCalendarToday } from 'react-icons/md'
+import { IoAdd, IoStarOutline } from 'react-icons/io5'
+
+const sideNavLinks = [
+  { name: 'All Tasks', icon: <BiTask /> },
+  { name: 'Today', icon: <MdOutlineCalendarToday />, active: true },
+  { name: 'Important', icon: <IoStarOutline /> }
+]
 
 const SideNav = () => {
   return (
-    <aside className='w-56 h-screen px-6 py-6 '>
-      <div className='part1 size-24 rounded-full flex items-center justify-center m-auto'>
-        <figure className='w-28 rounded-full'>
-          <img
-            src={profilePic}
-            alt='user profile pic'
-            className='size-full rounded-full block m-auto object-fit'
-          />
-        </figure>
+    <aside className={`relative w-82 h-screen px-6 py-6 mt-16`}>
+      <div className='mt-2  size-36 absolute top-8 left-1/4 text-center m-auto'>
+        <img src={profilePic} alt='Profile' className='rounded-full mx-auto' />
+        <p className='mt-2 font-semibold'>Hey, ABCD</p>
       </div>
-      <ul className='mt-6 mx-6 px-6 h-screen flex flex-col gap-3 bg-[#EEF6EF]'>
-        <li>
-          {' '}
-          <NavLink to='/'>
+      <div className='bg-amber-50 py-5 w-full h-screen p-5 mt-24'>
+        <nav className='mt-24 space-y-3 bg-white px-3 py-3 '>
+          {sideNavLinks.map((item, index) => (
+            <div
+              key={index}
+              className={`flex items-center space-x-3 p-2  rounded-md cursor-pointer ${
+                item.active ? 'bg-green-300' : 'hover:bg-green-200'
+              }`}
+            >
+              {item.icon}
+              <span>{item.name}</span>
+            </div>
+          ))}
+        </nav>
+
+        <div className='space-y-3 bg-white px-3 py-3 mt-5'>
+          <Link className='flex items-center space-x-3 px-2 py-5  rounded-md cursor-pointer'>
             {' '}
-            <BiTask /> All Tasks
-          </NavLink>{' '}
-        </li>
-        <li>
-          {' '}
-          <NavLink to='/'>Today</NavLink>{' '}
-        </li>
-        <li>
-          {' '}
-          <NavLink to='/'>Today</NavLink>{' '}
-        </li>
-        <li>
-          {' '}
-          <NavLink to='/'>Today</NavLink>{' '}
-        </li>
-      </ul>
+            <IoAdd /> <span>Add list </span>
+          </Link>
+        </div>
+      </div>
     </aside>
   )
 }
