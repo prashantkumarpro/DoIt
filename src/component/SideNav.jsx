@@ -10,9 +10,17 @@ const sideNavLinks = [
   { name: 'Important', icon: <IoStarOutline />, active: false }
 ]
 
-const SideNav = () => {
+const SideNav = ({ isMenuOpen }) => {
+  {
+    console.log(isMenuOpen)
+  }
+
   return (
-    <aside className={`relative w-82 h-screen px-6 py-6 mt-16`}>
+    <aside
+      className={`${
+        isMenuOpen ? 'max-w-0 px-0 overflow-hidden' : 'w-96 px-6 '
+      } relative  h-screen  py-6 `}
+    >
       <div className='mt-2  size-36 absolute top-8 left-1/4 text-center m-auto'>
         <img src={profilePic} alt='Profile' className='rounded-full mx-auto' />
         <p className='mt-2 font-semibold'>Hey, ABCD</p>
