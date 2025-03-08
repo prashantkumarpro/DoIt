@@ -11,7 +11,7 @@ import { Link } from 'react-router'
 const Header = () => {
   return (
     <>
-      <header className='bg-[#FBFDFC] m-auto w-full max-w-[1344px] h-[56px] flex justify-between items-center px-6 border-b border-gray-300'>
+      <header className='bg-[#FBFDFC] m-auto w-full max-w-[1344px] h-[56px] flex justify-between items-center px-6 border-b border-gray-300 fixed top-0 left-0 z-50'>
         <div className='flex gap-6 items-center'>
           <Link>
             {' '}
