@@ -1,11 +1,9 @@
-import {
-  RiGridFill,
-  RiMenuFill,
-  RiMoonLine,
-  RiSearchLine,
-  RiTodoLine
-} from '@remixicon/react'
+
 import React from 'react'
+import { CiGrid41 } from 'react-icons/ci'
+import { IoMenuOutline, IoSearchOutline } from 'react-icons/io5'
+import { PiMoonStarsBold } from 'react-icons/pi'
+import { RiTodoLine } from 'react-icons/ri'
 import { Link } from 'react-router'
 
 const Header = () => {
@@ -15,7 +13,7 @@ const Header = () => {
         <div className='flex gap-6 items-center'>
           <Link>
             {' '}
-            <RiMenuFill className='size-6' />
+            <IoMenuOutline className='size-6' />
           </Link>
           <h3 className='text-[#3F9142] text-xl flex items-center justify-center gap-0.5'>
             <RiTodoLine className='size-6' />
@@ -26,20 +24,20 @@ const Header = () => {
           <ul className='flex items-center justify-center gap-6'>
             <li>
               <Link>
-                <RiSearchLine className='size-6' />
+                <IoSearchOutline className='size-6' />
               </Link>
             </li>
             <li>
               <Link>
                 {' '}
-                <RiGridFill className='size-6' />
+                <CiGrid41 className='size-6' />
               </Link>
             </li>
             <li>
               {' '}
               <Link>
                 {' '}
-                <RiMoonLine className='size-6' />
+                <PiMoonStarsBold className='size-6' />
               </Link>
             </li>
           </ul>
