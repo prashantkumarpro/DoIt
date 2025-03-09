@@ -5,81 +5,81 @@ const Home = () => {
   const [title, setTitle] = useState('')
   const [note, setNote] = useState('')
   const [taskType, setTaskType] = useState('')
-  // const { addTask } = useContext(toDoesContext)
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: 'Go',
+      title: 'Go to market',
       text: 'Buy groceries',
       completed: false,
       important: false
     },
     {
       id: 2,
-      title: 'Go',
+      title: 'Finsh the assignments',
       text: 'Finish project report',
       completed: false,
       important: true
     },
     {
       id: 3,
-      title: 'Go',
+      title: 'Call the bank',
       text: 'Call the bank',
       completed: false,
       important: false
     },
     {
       id: 4,
-      title: 'Go',
+      title: 'Schedule the appoinment',
       text: 'Schedule dentist appointment',
       completed: false,
       important: false
     },
     {
       id: 5,
-      title: 'Go',
+      title: 'Make a plan',
       text: 'Plan weekend trip',
-      completed: false,
+      completed: true,
       important: false
     }
   ])
-  console.log(tasks)
 
-  const completedTasks = [
-    'Read a book',
-    'Clean the house',
-    'Prepare presentation',
-    'Update blog'
-  ]
-
-  const handleChange = e => {
-    setTitle(e.target.value)
-  }
-
-  const handleNote = e => {
-    setNote(e.target.value)
-  }
-
-  const handleKeyDown = e => {
-    if (e.key === 'Enter') {
-    }
-  }
+  const handleChange = e => setTitle(e.target.value)
+  const handleNote = e => setNote(e.target.value)
 
   const handleAddBtn = () => {
     if (title.trim() == 0 || note.trim() == 0) {
       alert('enter both title and text')
       return
     } else {
-      // addTask(title, text)
-      tasks.push({ title: title, text: note, taskType: taskType })
+      const newTask = {
+        id: tasks.length + 1,
+        title: title,
+        text: note,
+        taskType: taskType,
+        completed: false,
+        important: false
+      }
+      setTasks([...tasks, newTask])
       setNote('')
       setTitle('')
-      console.log(tasks)
     }
   }
 
-  const taskTypeHandler = event => {
-    setTaskType(event.target.value)
+  const toggleComplete = taskId => {
+    setTasks(prevTask =>
+      prevTask.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    )
+  }
+
+  const toogleImportant = taskId => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, important: !task.important } : task
+      )
+    )
   }
 
   return (
@@ -87,8 +87,13 @@ const Home = () => {
       <div className='w-full bg-[#EEF6EF]   min-h-72'>
         <h1 className='border-b border-gray-300 pb-1'>
           ToDo{' '}
-          <select id='task-type' onChange={taskTypeHandler}>
-            <option value='indoor' disabled></option>
+          <select
+            id='task-type'
+            onChange={event => setTaskType(event.target.value)}
+          >
+            <option value='' defaultValue={''} disabled>
+              select Type
+            </option>
             <option value='indoor'>Indoor</option>
             <option value='outdoor'>Outdoor</option>
           </select>
@@ -101,7 +106,6 @@ const Home = () => {
               onChange={handleChange}
               className='title w-full border-[none] outline-none py-2 bg-transparent'
               placeholder='Title'
-              onKeyDown={handleKeyDown}
             />
             <textarea
               name='note'
@@ -110,7 +114,7 @@ const Home = () => {
               className='w-full bg-transparent h-auto outline-none overflow-auto -scroll-ml-56'
               placeholder='Take a notes'
             ></textarea>
-            {/* <Save title={title} note={note} onSave={handleSave} /> */}
+
             <button
               className='cursor-pointer py-2 px-6 rounded-sm bg-[#3da25f29] text-black hover:bg-[#35793729] hover:text-black'
               onClick={handleAddBtn}
@@ -123,28 +127,39 @@ const Home = () => {
 
       {/* Task List */}
       <ul className='mt-4 space-y-3'>
-        {tasks.reverse().map((task, index) => (
-          <li
-            key={index}
-            className='flex justify-between py-4 px-5 border-b border-[#496E4B33]'
-          >
-            <div className='flex items-center space-x-6'>
-              {task.completed ? (
-                <FaCheckSquare className='text-xl' />
-              ) : (
-                <FaRegSquare className='text-xl' />
-              )}
-              <span>{task.text}</span>
-            </div>
-            <button>
-              {task.important ? (
-                <FaStar className='text-yellow-500 text-xl' />
-              ) : (
-                <FaRegStar className='text-xl' />
-              )}
-            </button>
-          </li>
-        ))}
+        {tasks
+          .filter(task => !task.completed)
+          .reverse()
+          .map(task => (
+            <li
+              key={task.id}
+              className='flex justify-between py-4 px-5 border-b border-[#496E4B33]'
+            >
+              <div className='flex items-center space-x-6'>
+                <button
+                  onClick={() => toggleComplete(task.id)}
+                  className='cursor-pointer'
+                >
+                  {task.completed ? (
+                    <FaCheckSquare className='text-xl' />
+                  ) : (
+                    <FaRegSquare className='text-xl' />
+                  )}
+                </button>
+                <span>{task.title}</span>
+              </div>
+              <button
+                className='cursor-pointer'
+                onClick={() => toogleImportant(task.id)}
+              >
+                {task.important ? (
+                  <FaStar className='text-slate-500 text-xl' />
+                ) : (
+                  <FaRegStar className='text-xl' />
+                )}
+              </button>
+            </li>
+          ))}
       </ul>
 
       {/* Completed Tasks */}
@@ -152,23 +167,40 @@ const Home = () => {
         Completed
       </h3>
       <ul className='mt-2 space-y-2'>
-        {completedTasks.map((task, index) => (
-          <li
-            key={index}
-            className='flex justify-between py-4 px-5 border-b border-[#496E4B33] '
-          >
-            <div className='flex items-center space-x-5'>
-              <FaCheckSquare className='text-green-500 text-xl' />
-              <span
-                style={{
-                  textDecoration: 'line-through'
-                }}
+        {tasks
+          .filter(task => task.completed)
+          .map(task => (
+            <li
+              key={task.id}
+              className='flex justify-between py-4 px-5 border-b border-[#496E4B33] '
+            >
+              <div className='flex items-center space-x-6'>
+                <button
+                  onClick={() => toggleComplete(task.id)}
+                  className='cursor-pointer'
+                >
+                  {task.completed ? (
+                    <FaCheckSquare className='text-xl text-green-500' />
+                  ) : (
+                    <FaRegSquare className='text-xl' />
+                  )}
+                </button>
+                <span className={`${task.completed ? 'line-through' : ''}`}>
+                  {task.title}
+                </span>
+              </div>
+              <button
+                className='cursor-pointer'
+                onClick={() => toogleImportant(task.id)}
               >
-                {task}
-              </span>
-            </div>
-          </li>
-        ))}
+                {task.important ? (
+                  <FaStar className='text-slate-500 text-xl' />
+                ) : (
+                  <FaRegStar className='text-xl' />
+                )}
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   )
