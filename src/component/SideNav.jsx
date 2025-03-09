@@ -11,10 +11,6 @@ const sideNavLinks = [
 ]
 
 const SideNav = ({ isMenuOpen }) => {
-  {
-    console.log(isMenuOpen)
-  }
-
   return (
     <aside
       className={`${
