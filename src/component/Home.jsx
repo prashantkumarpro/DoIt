@@ -3,7 +3,6 @@ import { FaCheckSquare, FaRegSquare, FaRegStar, FaStar } from 'react-icons/fa'
 
 const Home = () => {
   const [title, setTitle] = useState('')
-  const [note, setNote] = useState('')
   const [taskType, setTaskType] = useState('')
 
   const [tasks, setTasks] = useState([
@@ -45,23 +44,20 @@ const Home = () => {
   ])
 
   const handleChange = e => setTitle(e.target.value)
-  const handleNote = e => setNote(e.target.value)
 
   const handleAddBtn = () => {
-    if (title.trim() == 0 || note.trim() == 0) {
-      alert('enter both title and text')
+    if (title.trim() == 0) {
+      alert('enter a task')
       return
     } else {
       const newTask = {
         id: tasks.length + 1,
         title: title,
-        text: note,
         taskType: taskType,
         completed: false,
         important: false
       }
       setTasks([...tasks, newTask])
-      setNote('')
       setTitle('')
     }
   }
@@ -82,16 +78,27 @@ const Home = () => {
     )
   }
 
+  const handleTaskType = event => {
+    const selectedValue = event.target.value
+    setTaskType(selectedValue)
+    myFunction(selectedValue)
+  }
+
+  const myFunction = value => {
+    console.log('Using taskType:', value)
+  }
+
   return (
     <div className='w-full'>
       <div className='w-full bg-[#EEF6EF]   min-h-72'>
         <h1 className='border-b border-gray-300 pb-1'>
           <select
             id='task-type'
+            value={taskType}
             className='w-full mt-2 p-2 outline-none cursor-pointer'
-            onChange={event => setTaskType(event.target.value)}
+            onChange={event => handleTaskType(event)}
           >
-            <option value='' defaultValue={''} >
+            <option value='' disabled>
               ToDo{' '}
             </option>
             <option value='indoor'>Indoor</option>
@@ -100,23 +107,26 @@ const Home = () => {
         </h1>
         <div className='crete_task_container px-6  py-4 w-full h-auto'>
           <div className='taskInput p-2 w-full my-0 bg-[#FFFFFF]  rounded-md '>
+            {taskType === 'Outedoor' ? <h1>Hello</h1> : ''}
             <input
               type='text'
               value={title}
               onChange={handleChange}
-              className='title w-full border-[none] outline-none py-2 bg-transparent'
-              placeholder='Title'
+              className='title w-full  outline-none py-4 bg-transparent border-b border-gray-300'
+              placeholder='Enter a task'
             />
-            <textarea
-              name='note'
-              value={note}
-              onChange={handleNote}
-              className='w-full bg-transparent h-auto outline-none overflow-auto -scroll-ml-56'
-              placeholder='Take a notes'
-            ></textarea>
 
+            {taskType === 'outdoor' ? (
+              <input
+                type='text'
+                placeholder='Enter city name'
+                className='title w-full border-b border-gray-300 pb-1 outline-none py-4 bg-transparent'
+              />
+            ) : (
+              ''
+            )}
             <button
-              className='cursor-pointer py-2 px-6 rounded-sm bg-[#3da25f29] text-black hover:bg-[#35793729] hover:text-black'
+              className='mt-5 cursor-pointer py-2 px-6 rounded-sm bg-[#3da25f29] text-black hover:bg-[#35793729] hover:text-black'
               onClick={handleAddBtn}
             >
               Add
