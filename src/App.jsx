@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import Home from './component/Home'
 import Layout from './component/Layout'
-import Tasks from './component/Tasks'
+import AllTasks from './component/AllTasks'
 
 function App () {
   return (
@@ -11,7 +11,7 @@ function App () {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path='allTasks' element={<Tasks />} />
+            <Route path='allTasks' element={<AllTasks />} />
           </Route>
         </Routes>
       </BrowserRouter>

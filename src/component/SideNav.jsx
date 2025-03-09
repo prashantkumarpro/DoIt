@@ -5,8 +5,8 @@ import { MdOutlineCalendarToday } from 'react-icons/md'
 import { IoAdd, IoStarOutline } from 'react-icons/io5'
 
 const sideNavLinks = [
-  { name: 'All Tasks', icon: <BiTask />, active: false },
-  { name: 'Today', icon: <MdOutlineCalendarToday />, active: true },
+  { name: 'All Tasks', icon: <BiTask />, active: false, link: 'allTasks' },
+  { name: 'Today', icon: <MdOutlineCalendarToday />, active: true, link: '/' },
   { name: 'Important', icon: <IoStarOutline />, active: false }
 ]
 
@@ -24,7 +24,8 @@ const SideNav = ({ isMenuOpen }) => {
       <div className='bg-[#EEF6EF] py-5 w-full h-screen p-5 mt-24'>
         <nav className='mt-24 space-y-3 bg-[#FBFDFC] px-3 py-3 '>
           {sideNavLinks.map((item, index) => (
-            <div
+            <Link
+              to={item.link}
               key={index}
               className={`flex items-center space-x-3 p-2  rounded-md cursor-pointer ${
                 item.active ? 'bg-[#35793729]' : 'hover:bg-[#75cb9229]'
@@ -32,7 +33,7 @@ const SideNav = ({ isMenuOpen }) => {
             >
               {item.icon}
               <span>{item.name}</span>
-            </div>
+            </Link>
           ))}
         </nav>
 

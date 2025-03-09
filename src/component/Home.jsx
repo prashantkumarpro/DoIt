@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { FaCheckSquare, FaRegSquare, FaRegStar, FaStar } from 'react-icons/fa'
+
+import AllTasks from './AllTasks'
+import Completed from './Completed'
 
 const Home = () => {
   const [title, setTitle] = useState('')
@@ -112,7 +114,7 @@ const Home = () => {
               type='text'
               value={title}
               onChange={handleChange}
-              className='title w-full  outline-none py-4 bg-transparent border-b border-gray-300'
+              className='title w-full  outline-none py-3 bg-transparent border-b border-gray-300'
               placeholder='Enter a task'
             />
 
@@ -120,7 +122,7 @@ const Home = () => {
               <input
                 type='text'
                 placeholder='Enter city name'
-                className='title w-full border-b border-gray-300 pb-1 outline-none py-4 bg-transparent'
+                className='title w-full  outline-none py-3 bg-transparent border-b border-gray-300'
               />
             ) : (
               ''
@@ -135,83 +137,19 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Task List */}
-      <ul className='mt-4 space-y-3'>
-        {tasks
-          .filter(task => !task.completed)
-          .reverse()
-          .map(task => (
-            <li
-              key={task.id}
-              className='flex justify-between py-4 px-5 border-b border-[#496E4B33]'
-            >
-              <div className='flex items-center space-x-6'>
-                <button
-                  onClick={() => toggleComplete(task.id)}
-                  className='cursor-pointer'
-                >
-                  {task.completed ? (
-                    <FaCheckSquare className='text-xl' />
-                  ) : (
-                    <FaRegSquare className='text-xl' />
-                  )}
-                </button>
-                <span>{task.title}</span>
-              </div>
-              <button
-                className='cursor-pointer'
-                onClick={() => toogleImportant(task.id)}
-              >
-                {task.important ? (
-                  <FaStar className='text-slate-500 text-xl' />
-                ) : (
-                  <FaRegStar className='text-xl' />
-                )}
-              </button>
-            </li>
-          ))}
-      </ul>
+      <AllTasks
+        tasks={tasks}
+        toggleComplete={toggleComplete}
+        toogleImportant={toogleImportant}
+      />
 
       {/* Completed Tasks */}
-      <h3 className='mt-6 font-semibold border-b border-gray-300 py-5'>
-        Completed
-      </h3>
-      <ul className='mt-2 space-y-2'>
-        {tasks
-          .filter(task => task.completed)
-          .map(task => (
-            <li
-              key={task.id}
-              className='flex justify-between py-4 px-5 border-b border-[#496E4B33] '
-            >
-              <div className='flex items-center space-x-6'>
-                <button
-                  onClick={() => toggleComplete(task.id)}
-                  className='cursor-pointer'
-                >
-                  {task.completed ? (
-                    <FaCheckSquare className='text-xl text-green-500' />
-                  ) : (
-                    <FaRegSquare className='text-xl' />
-                  )}
-                </button>
-                <span className={`${task.completed ? 'line-through' : ''}`}>
-                  {task.title}
-                </span>
-              </div>
-              <button
-                className='cursor-pointer'
-                onClick={() => toogleImportant(task.id)}
-              >
-                {task.important ? (
-                  <FaStar className='text-slate-500 text-xl' />
-                ) : (
-                  <FaRegStar className='text-xl' />
-                )}
-              </button>
-            </li>
-          ))}
-      </ul>
+
+      <Completed
+        tasks={tasks}
+        toggleComplete={toggleComplete}
+        toogleImportant={toogleImportant}
+      />
     </div>
   )
 }
