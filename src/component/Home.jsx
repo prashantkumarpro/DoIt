@@ -86,13 +86,13 @@ const Home = () => {
     <div className='w-full'>
       <div className='w-full bg-[#EEF6EF]   min-h-72'>
         <h1 className='border-b border-gray-300 pb-1'>
-          ToDo{' '}
           <select
             id='task-type'
+            className='w-full mt-2 p-2 outline-none cursor-pointer'
             onChange={event => setTaskType(event.target.value)}
           >
-            <option value='' defaultValue={''} disabled>
-              select Type
+            <option value='' defaultValue={''} >
+              ToDo{' '}
             </option>
             <option value='indoor'>Indoor</option>
             <option value='outdoor'>Outdoor</option>
