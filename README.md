@@ -16,7 +16,7 @@
 ## 🛠️ Tech Stack
 - **Frontend:** React.js, Tailwind CSS
 - **State Management:** useState, useEffect (React Hooks), Redux-toolkit, Redux Thunk (working on redux Thunk api call)
-- **API Integration:** Fetch API / Axios (for Weather API)
+- **API Integration:** Fetch API  (for Weather API)
 - **Icons:** React Icons
 
 ## 🔧 Installation & Setup
