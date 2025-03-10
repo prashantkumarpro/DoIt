@@ -1,6 +1,5 @@
-import React from 'react'
 import { FaCheckSquare, FaRegSquare, FaRegStar, FaStar } from 'react-icons/fa'
-const AllTasks = ({ tasks, toggleComplete, toogleImportant }) => {
+const AllTasks = ({ tasks, toggleComplete, toogleImportant, weatherInfo }) => {
   return (
     <div className='w-full'>
       {/* Task List */}
@@ -27,6 +26,17 @@ const AllTasks = ({ tasks, toggleComplete, toogleImportant }) => {
                   </button>
                   <span>{task.title}</span>
                 </div>
+                <div>
+                  {task.taskType === 'outdoor' && (
+                    <div>
+                      <p>
+                        {weatherInfo.current.temp_c}°C{' '}
+                        <span>{weatherInfo.current.condition.text}</span>
+                      </p>
+                    </div>
+                  )}
+                </div>
+
                 <button
                   className='cursor-pointer'
                   onClick={() => toogleImportant(task.id)}
@@ -42,10 +52,10 @@ const AllTasks = ({ tasks, toggleComplete, toogleImportant }) => {
         </ul>
       ) : (
         <div className='w-full bg-[#EEF6EF] flex items-center justify-center  min-h-72'>
-          <h1 className='m-auto p-5 text-3xl'>
-            There are not tasks available.For now this page is under
-            maintenance. Developer is working hard for this feature. Please see
-            all task in Home page.
+          <h1 className='m-auto p-5 text-2xl'>
+            There are no tasks available.For now this page is under maintenance.
+            Developer is working hard for this feature. Please see all task in
+            Home page.
           </h1>
         </div>
       )}
