@@ -75,7 +75,7 @@ const Home = () => {
 
     try {
       const res = await fetch(
-        `http://api.weatherapi.com/v1/current.json?key=${api_key}&q=${userCity}&aqi=no`
+        `https://api.weatherapi.com/v1/current.json?key=${api_key}&q=${userCity}&aqi=no`
       )
 
       if (!res.ok) throw new Error('failed to fetch data')
