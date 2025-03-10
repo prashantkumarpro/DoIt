@@ -7,17 +7,16 @@
 - ✅ **Add, Edit, Delete Tasks** 
 - ⭐ **Mark Tasks as Important**
 - 📅 **Categorize Tasks (Today, Planned, Assigned, etc.)** (in progress)
-- 📊 **Task Progress Overview**
 - 🌙 **Dark Mode Support** (in progress)
-- 📍 **Geolocation-based Outdoor/Indoor Task Categorization**  (in progress)
-- 🌦 **Weather API Integration for Outdoor Tasks**  (in progress)
+- 📍 **Geolocation-based Outdoor/Indoor Task Categorization**
+- 🌦 **Weather API Integration for Outdoor Tasks**
 - 📱 **Fully Responsive Design**  (in progress)
 
 
 ## 🛠️ Tech Stack
 - **Frontend:** React.js, Tailwind CSS
-- **State Management:** useState, useEffect (React Hooks), Redux-toolkit, Redux Thunk (planed)
-- **API Integration:** Fetch API / Axios (for Weather API) (In progress)
+- **State Management:** useState, useEffect (React Hooks), Redux-toolkit, Redux Thunk (working on redux Thunk api call)
+- **API Integration:** Fetch API / Axios (for Weather API)
 - **Icons:** React Icons
 
 ## 🔧 Installation & Setup
