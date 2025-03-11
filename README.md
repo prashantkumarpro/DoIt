@@ -39,7 +39,7 @@
 
 ## 🌦️ API Integration (Weather API)
 To fetch weather data for outdoor tasks, you need to set up an API key:
-1. Sign up at [OpenWeather API](https://openweathermap.org/api) or any weather API provider.
+1. Sign up at [Free Weather API](https://www.weatherapi.com/) or any weather API provider.
 2. Get your API key and create a `.env` file in the root directory:
    ```bash
    REACT_APP_WEATHER_API_KEY=your_api_key_here
