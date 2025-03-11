@@ -5,6 +5,7 @@ import SideNav from './SideNav'
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  
 
   return (
     <div>

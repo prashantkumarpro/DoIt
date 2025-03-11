@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaCheckSquare, FaRegSquare, FaRegStar, FaStar } from 'react-icons/fa'
 const Completed = ({ tasks, toggleComplete, toogleImportant }) => {
+  
   return (
     <div>
       <h3 className='mt-6 font-semibold border-b border-gray-300 py-5'>

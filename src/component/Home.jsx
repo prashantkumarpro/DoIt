@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import AllTasks from './AllTasks'
 import Completed from './Completed'
 
@@ -7,46 +6,15 @@ const Home = () => {
   const [title, setTitle] = useState('')
   const [taskType, setTaskType] = useState('')
   const [cityName, setCityName] = useState('')
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Go to market',
-      text: 'Buy groceries',
-      completed: false,
-      important: false
-    },
-    {
-      id: 2,
-      title: 'Finsh the assignments',
-      text: 'Finish project report',
-      completed: false,
-      important: true
-    },
-    {
-      id: 3,
-      title: 'Call the bank',
-      text: 'Call the bank',
-      completed: false,
-      important: false
-    },
-    {
-      id: 4,
-      title: 'Schedule the appoinment',
-      text: 'Schedule dentist appointment',
-      completed: false,
-      important: false
-    },
-    {
-      id: 5,
-      title: 'Make a plan',
-      text: 'Plan weekend trip',
-      completed: true,
-      important: false
-    }
-  ])
   const [weatherInfo, setWeatherInfo] = useState(null)
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem('taskLists')) || []
+  )
+
+
   const handleChange = e => setTitle(e.target.value)
   const handleTaskType = event => setTaskType(event.target.value)
+ 
 
   const handleAddBtn = () => {
     if (title.trim() == 0) {
@@ -61,11 +29,16 @@ const Home = () => {
         completed: false,
         important: false
       }
-      setTasks([...tasks, newTask])
+
+      setTasks(prevTasks => [...prevTasks, newTask])
       setTitle('')
       setCityName('')
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('taskLists', JSON.stringify(tasks))
+  }, [tasks])
 
   const fetchedData = async city => {
     if (!city.trim()) return
@@ -163,7 +136,8 @@ const Home = () => {
       </div>
 
       <AllTasks
-        tasks={tasks}
+        getTasks={tasks}
+        setGetTasks={setTasks}
         toggleComplete={toggleComplete}
         toogleImportant={toogleImportant}
         weatherInfo={weatherInfo}

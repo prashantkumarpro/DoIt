@@ -1,11 +1,15 @@
 import { FaCheckSquare, FaRegSquare, FaRegStar, FaStar } from 'react-icons/fa'
-const AllTasks = ({ tasks, toggleComplete, toogleImportant, weatherInfo }) => {
+const AllTasks = ({
+  getTasks,
+  toggleComplete,
+  toogleImportant,
+  weatherInfo
+}) => {
   return (
     <div className='w-full'>
-      {/* Task List */}
-      {tasks ? (
+      {getTasks ? (
         <ul className='mt-4 space-y-3'>
-          {tasks
+          {getTasks
             ?.filter(task => !task.completed)
             .reverse()
             .map(task => (
@@ -27,7 +31,7 @@ const AllTasks = ({ tasks, toggleComplete, toogleImportant, weatherInfo }) => {
                   <span>{task.title}</span>
                 </div>
                 <div>
-                  {task.taskType === 'outdoor' && (
+                  {task.taskType === 'outdoor' && weatherInfo && (
                     <div>
                       <p>
                         {weatherInfo.current.temp_c}°C{' '}
@@ -52,11 +56,7 @@ const AllTasks = ({ tasks, toggleComplete, toogleImportant, weatherInfo }) => {
         </ul>
       ) : (
         <div className='w-full bg-[#EEF6EF] flex items-center justify-center  min-h-72'>
-          <h1 className='m-auto p-5 text-2xl'>
-            There are no tasks available.For now this page is under maintenance.
-            Developer is working hard for this feature. Please see all task in
-            Home page.
-          </h1>
+          <p>No tasks available</p>
         </div>
       )}
     </div>
